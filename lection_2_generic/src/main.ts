@@ -242,14 +242,76 @@ Generics
 
 // ===================================
 
-interface Employee {
-  id: number;
-  name: string;
-  email: string;
-  department: string;
-  hireDate: Date; // hide info
-}
+// interface Employee {
+//   id: number;
+//   name: string;
+//   email: string;
+//   department: string;
+//   hireDate: Date; // hide info
+// }
 
 // створмо новий інтерфейс, який буде мати усі значення,
 // окрім дати найму
-type EmployeeBasicInfo = Omit<Employee, "hireDate">;
+// type EmployeeBasicInfo = Omit<Employee, "hireDate">;
+
+// ========================================
+
+// interface User {
+//   id: number;
+//   name: string;
+//   email: string;
+// }
+
+// async function fetchUser(): Promise<User> {
+//   try {
+//     const response = await fetch("https://api.user.com");
+//     const user = await response.json();
+//     return user;
+//   } catch (error) {
+//     console.log("fetch error");
+//     throw error;
+//   }
+// }
+
+// const user = {
+//   id: 1,
+//   name: "Bob",
+//   email: "example@aa.com",
+// };
+
+// =========================================
+
+// async function fetchUser<T>(url: string): Promise<T> {
+//   try {
+//     const response = await fetch(url);
+//     const user: T = await response.json();
+//     return user;
+//   } catch (error) {
+//     console.log("fetch error");
+//     throw error;
+//   }
+// }
+
+// ============================================
+
+// interface User {
+//   id: number;
+//   name: string;
+//   email: string;
+// }
+
+// async function fetchUser<T>(url: string): Promise<T> {
+//   try {
+//     const response: T = await axios.get(url);
+//     return response;
+//   } catch (error) {
+//     console.log("fetch error");
+//     throw error;
+//   }
+// }
+
+// const user = {
+//   id: 1,
+//   name: "Bob",
+//   email: "example@aa.com",
+// };
