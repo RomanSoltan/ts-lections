@@ -1,6 +1,12 @@
 import TodoItem from "./TodoItem";
+import { Todo } from "./types";
 
-const TodoList = ({ todos, deleteTodo }) => {
+interface TodoListProps {
+  todos: Todo[];
+  deleteTodo: (id: number) => void;
+}
+
+const TodoList: React.FC<TodoListProps> = ({ todos, deleteTodo }) => {
   return (
     <ul>
       {todos.map((todo) => (

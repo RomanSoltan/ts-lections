@@ -1,10 +1,6 @@
 import React, { useState, FormEvent } from "react";
 import TodoList from "./TodoList";
-
-interface Todo {
-  id: number;
-  text: string;
-}
+import { Todo } from "./types";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
