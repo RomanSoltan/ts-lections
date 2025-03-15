@@ -1,4 +1,12 @@
-const TodoItem = ({ todo, deleteTodo }) => {
+import React from "react";
+import { Todo } from "./types";
+
+interface TodoItemProps {
+  todo: Todo;
+  deleteTodo: (id: number) => void;
+}
+
+const TodoItem: React.FC<TodoItemProps> = ({ todo, deleteTodo }) => {
   return (
     <li>
       {todo.text}
