@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, FormEvent } from "react";
+import TodoList from "./TodoList";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface Todo {
+  id: number;
+  text: string;
 }
 
-export default App
+function App() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [task, setTask] = useState<string>("");
+
+  const addTodo = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault(); // Prevent the form from reloading the page
+    if (task) {
+      // Check if the task is not empty
+      const newTodo: Todo = {
+        id: Date.now(),
+        text: task,
+      };
+      setTodos([...todos, newTodo]);
+      setTask(""); // Clear input after adding
+    }
+  };
+
+  const deleteTodo = (id: number): void => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+  };
+
+  return (
+    <div className="App">
+      <h1>Todo list</h1>
+      <form onSubmit={addTodo}>
+        <input
+          type="text"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          placeholder="Add a new task"
+        />
+        <button type="submit">Add Task</button>
+      </form>
+      <TodoList todos={todos} deleteTodo={deleteTodo} />
+    </div>
+  );
+}
+
+export default App;
